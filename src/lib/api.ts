@@ -1,14 +1,9 @@
-const rawMathExplainerBaseUrl =
-  process.env.NEXT_PUBLIC_MATH_EXPLAINER_API_BASE_URL?.trim() ?? "/api/math-explainer";
-
-const normalizedMathExplainerBaseUrl = rawMathExplainerBaseUrl.replace(/\/+$/, "");
-
-const forceMockVideoApi = process.env.NEXT_PUBLIC_FORCE_MOCK_VIDEO_API === "true";
+const normalizedMathExplainerBaseUrl = "http://localhost:8000";
 
 export const MATH_EXPLAINER_API = {
   baseUrl: normalizedMathExplainerBaseUrl,
-  hasBaseUrl: normalizedMathExplainerBaseUrl.length > 0,
-  useRealVideoApi: !forceMockVideoApi && normalizedMathExplainerBaseUrl.length > 0,
+  hasBaseUrl: true,
+  useRealVideoApi: true,
   pollingIntervalMs: 2000,
   maxPollingAttempts: 180,
   endpoints: {

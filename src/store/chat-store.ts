@@ -460,11 +460,16 @@ export const useChatStore = create<ChatState>((set, get) => ({
         saveSessionIndex(sessions);
         return { sessions };
       });
-    } catch {
+    } catch (error) {
       const latest = get().sessions.find((session) => session.id === pending.chatId);
       if (!latest) {
         return;
       }
+
+      const errorMessage =
+        error instanceof Error && error.message
+          ? error.message
+          : "Video generation failed";
 
       const failed: ChatSession = {
         ...latest,
@@ -480,7 +485,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
             video: {
               status: "failed",
               stageLabel: "failed",
-              error: "Mock generation failed",
+              error: errorMessage,
             },
           };
         }),
