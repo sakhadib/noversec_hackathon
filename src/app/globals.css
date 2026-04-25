@@ -48,3 +48,24 @@ input,
 textarea {
   font: inherit;
 }
+
+@keyframes ambientGlowShift {
+  0% {
+    background-position: 0% 20%, 100% 80%, 50% 50%;
+  }
+  50% {
+    background-position: 100% 30%, 10% 70%, 60% 40%;
+  }
+  100% {
+    background-position: 0% 20%, 100% 80%, 50% 50%;
+  }
+}
+
+.animated-glow-bg {
+  background-image:
+    radial-gradient(circle at top right, rgba(34, 211, 238, 0.2), transparent 45%),
+    radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.22), transparent 48%),
+    linear-gradient(180deg, #191b22 0%, #171923 50%, #14161d 100%);
+  background-size: 180% 180%, 200% 200%, 100% 100%;
+  animation: ambientGlowShift 16s ease-in-out infinite;
+}

@@ -7,11 +7,16 @@ import { faArrowUp, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 type Props = {
   isSending: boolean;
   onSend: (text: string, forceVideo: boolean) => void;
+  prefill?: {
+    text: string;
+    forceVideo?: boolean;
+    nonce: number;
+  } | null;
 };
 
-export function ChatComposer({ isSending, onSend }: Props) {
-  const [text, setText] = useState("");
-  const [forceVideo, setForceVideo] = useState(false);
+export function ChatComposer({ isSending, onSend, prefill }: Props) {
+  const [text, setText] = useState(() => prefill?.text ?? "");
+  const [forceVideo, setForceVideo] = useState(() => Boolean(prefill?.forceVideo));
   const [showTools, setShowTools] = useState(false);
   const toolsRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -83,15 +88,18 @@ export function ChatComposer({ isSending, onSend }: Props) {
     }
   };
 
-  const floatingButtonStyle = { top: "50%", transform: "translateY(-50%)" };
+  const floatingButtonStyle = { top: "calc(50% - 5px)", transform: "translateY(-50%)" };
 
   return (
-    <form className="border-t border-white/10 bg-[#2f2f2f] px-5 pb-4 pt-3" onSubmit={handleSubmit}>
+    <form
+      className="border-t border-cyan-200/10 bg-[linear-gradient(180deg,_#1b2432,_#1c2130)] px-5 pb-4 pt-3"
+      onSubmit={handleSubmit}
+    >
       <div className="relative" ref={toolsRef}>
         <textarea
           ref={textareaRef}
           rows={1}
-          className={`min-h-[62px] w-full resize-none rounded-2xl border border-white/15 bg-[#3a3a3a] pl-[68px] pr-[68px] text-[17px] leading-7 text-[#f3f2ec] outline-none focus:border-[#b8b8b8] ${
+          className={`min-h-[62px] w-full resize-none rounded-2xl border border-cyan-100/20 bg-[linear-gradient(180deg,_#1d2b3f,_#202635)] pl-[68px] pr-[68px] text-[17px] leading-7 text-[#f3f2ec] outline-none focus:border-[#67e8f9] ${
             forceVideo ? "pb-3 pt-11" : "py-[14px]"
           }`}
           placeholder="Ask anything. Ctrl+Enter to send."
@@ -104,7 +112,7 @@ export function ChatComposer({ isSending, onSend }: Props) {
 
         {forceVideo ? (
           <div className="pointer-events-none absolute left-14 top-2">
-            <div className="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#4d4d4d] px-3 py-1 text-xs text-white">
+            <div className="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-sky-100/30 bg-[linear-gradient(120deg,_#0e7490,_#2563eb)] px-3 py-1 text-xs text-white">
               <span>Create video</span>
               <button
                 type="button"
@@ -120,7 +128,7 @@ export function ChatComposer({ isSending, onSend }: Props) {
 
         <button
           type="button"
-          className="absolute left-[20px] inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-[#4b4b4b] text-[#f3f2ec] leading-none"
+          className="absolute left-[20px] inline-flex h-10 w-10 items-center justify-center rounded-full border border-cyan-100/30 bg-[linear-gradient(120deg,_#0ea5e9,_#2563eb)] text-[#f3f2ec] leading-none shadow-[0_8px_20px_rgba(37,99,235,0.35)]"
           style={floatingButtonStyle}
           onClick={() => setShowTools((value) => !value)}
           aria-label="Open message tools"
@@ -129,14 +137,14 @@ export function ChatComposer({ isSending, onSend }: Props) {
         </button>
 
         {showTools ? (
-          <div className="absolute bottom-14 left-[20px] z-20 w-40 rounded-lg border border-white/20 bg-[#262626] p-1 shadow-lg">
+          <div className="absolute bottom-14 left-[20px] z-20 w-40 rounded-lg border border-cyan-100/20 bg-[#132135] p-1 shadow-lg">
             <button
               type="button"
               onClick={() => {
                 setForceVideo(true);
                 setShowTools(false);
               }}
-              className="block w-full rounded-md px-3 py-2 text-left text-sm text-[#f3f2ec] hover:bg-[#3a3a3a]"
+              className="block w-full rounded-md px-3 py-2 text-left text-sm text-[#f3f2ec] hover:bg-[#1e3555]"
             >
               Create video
             </button>
@@ -146,7 +154,7 @@ export function ChatComposer({ isSending, onSend }: Props) {
         <button
           type="submit"
           disabled={isSending || !text.trim()}
-          className="absolute right-[20px] inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-[#4d4d4d] text-white leading-none disabled:cursor-not-allowed disabled:bg-[#6a6a6a]"
+          className="absolute right-[20px] inline-flex h-10 w-10 items-center justify-center rounded-full border border-emerald-100/30 bg-[linear-gradient(120deg,_#0ea5e9,_#10b981)] text-white leading-none shadow-[0_8px_20px_rgba(16,185,129,0.35)] disabled:cursor-not-allowed disabled:bg-[#6a6a6a]"
           style={floatingButtonStyle}
           aria-label="Send message"
         >

@@ -38,10 +38,10 @@ export function VideoCard({ message }: Props) {
   };
 
   return (
-    <div className="mt-3 rounded-2xl border border-white/15 bg-[#3a3a3a] p-3">
+    <div className="mt-3 rounded-2xl border border-sky-100/20 bg-[linear-gradient(160deg,_#1a293f,_#233148)] p-3">
       {video.status !== "ready" ? (
-        <div className="text-sm text-[#d7d7d7]">
-          <p className="font-semibold">Video pipeline</p>
+        <div className="text-sm text-[#d7f0ff]">
+          <p className="font-semibold text-[#a5e9ff]">Video pipeline</p>
           <p className="mt-1 capitalize">{statusText}</p>
         </div>
       ) : (
@@ -57,14 +57,14 @@ export function VideoCard({ message }: Props) {
             <a
               href={video.downloadUrl}
               download={video.fileName ?? "strugglemap-video.mp4"}
-              className="rounded-lg bg-[#4d4d4d] px-3 py-2 text-sm font-medium text-white"
+              className="rounded-lg bg-[linear-gradient(120deg,_#0ea5e9,_#2563eb)] px-3 py-2 text-sm font-medium text-white"
             >
               Download
             </a>
             <button
               type="button"
               onClick={openFullscreen}
-              className="rounded-lg border border-white/20 px-3 py-2 text-sm font-medium"
+              className="rounded-lg border border-cyan-100/30 bg-[#0f253a]/50 px-3 py-2 text-sm font-medium"
             >
               Fullscreen
             </button>

@@ -19,14 +19,14 @@ export function MessageBubble({ message }: Props) {
   return (
     <div className={`flex ${fromUser ? "justify-end" : "justify-start"}`}>
       {!fromUser ? (
-        <div className="mr-3 mt-1 h-8 w-8 shrink-0 text-[#d8d8d8]">
+        <div className="mr-3 mt-1 h-8 w-8 shrink-0 text-[#8be9ff]">
           <FontAwesomeIcon icon={faRobot} className="h-full w-full" />
         </div>
       ) : null}
       <div
         className={`max-w-[90%] px-1 py-1 md:max-w-[72%] ${
           fromUser
-            ? "rounded-2xl bg-[#4d4d4d] px-4 py-3 text-white"
+            ? "rounded-2xl bg-[linear-gradient(120deg,_#1f4f7a,_#2563eb)] px-4 py-3 text-white shadow-[0_10px_24px_rgba(37,99,235,0.25)]"
             : "text-[#f3f2ec]"
         }`}
       >
@@ -46,10 +46,10 @@ export function MessageBubble({ message }: Props) {
                 ol: ({ children }) => <ol className="list-decimal space-y-1 pl-6">{children}</ol>,
                 li: ({ children }) => <li>{children}</li>,
                 code: ({ children }) => (
-                  <code className="rounded bg-[#454545] px-1.5 py-0.5 font-mono text-[0.9em]">{children}</code>
+                  <code className="rounded bg-[#2a3a52] px-1.5 py-0.5 font-mono text-[0.9em] text-[#dbeafe]">{children}</code>
                 ),
                 pre: ({ children }) => (
-                  <pre className="overflow-x-auto rounded-lg bg-[#3d3d3d] p-3 text-sm">{children}</pre>
+                  <pre className="overflow-x-auto rounded-lg bg-[#1f2d43] p-3 text-sm">{children}</pre>
                 ),
                 strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
                 hr: () => <hr className="border-white/20" />,
